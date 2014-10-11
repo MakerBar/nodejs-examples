@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Example Web Page</title>
+  </head>
+  <body>
+    <h1>My Webpage</h1>
+    <p>Here it is</p>
+    
+    <!--- Note that /static is used, even if the picture is in /public --->
+    <img src="/static/makerbar.jpg" alt="Makerbar picture">
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      
+      socket.on("message", function(msg){
+        console.log(msg);
+      });
+    </script>
+  </body>
+</html>
