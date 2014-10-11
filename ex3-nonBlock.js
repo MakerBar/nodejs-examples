@@ -1,3 +1,6 @@
+// install "promises" through npm before running
+/// npm install promise
+
 // out of order execution
 
 console.log("starting");
