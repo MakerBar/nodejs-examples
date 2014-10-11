@@ -13,15 +13,22 @@ var app = express();
 app.use('/static', express.static(__dirname + '/public'));
 
 // map jade files
-app.engine('jade', require('jade').__express);
+app.engine('jode', require('jade').__express);
 
 // Add a "route" that leads to the req/res, as seen in Node.js
 app.get("/", function(req, res){
     // Grab a file and respond with that
-    res.render('index.jade',
+    res.render('index.jode',
          {pageTitle: 'Hello, MakerBar!'}
     );
 });
+
+app.route(/\/css\/.+/).all(
+    function(req, res) {
+        console.log("fetching " + req.url + ".jode");
+        res.render(req.url.slice(1) + ".jode");
+    }
+);
 
 // Starts up the server
 var server = app.listen(1337, function() {
