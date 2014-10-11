@@ -10,4 +10,4 @@ http.createServer(function (req, res) {
   res.end("This is my website\n");
   
 // Have server listen on port "1337"
-}).listen(1337, "127.0.0.1");
+}).listen(1337, "0.0.0.0");
