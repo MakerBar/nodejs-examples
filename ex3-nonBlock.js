@@ -1,18 +1,28 @@
-// Non blocking example
-http://webapplog.com/asynchronicity-in-node-js/
-var test = function (callback) {
-  return callback();  
-  console.log('test') //shouldn't be printed
-}
+// out of order execution
 
-var test2 = function(callback){
-  callback();
-  console.log('test2') //printed 3rd
-}
-
-test(function(){
-  console.log('callback1') //printed first
-  test2(function(){
-  console.log('callback2') //printed 2nd
-  })
+console.log("starting");
+process.nextTick(function() {
+    console.log("next tick");
 });
+console.log("end example 2");
+
+// using promises to process callbacks
+
+var Promise = require('promise');
+
+function getData() {
+    return new Promise(function(resolve, reject) {
+	// this takes 5 seconds to resolve
+	setTimeout(function() {
+	    console.log("resolving promise");
+	    resolve("hello");
+	}, 5000);
+    });
+}
+
+console.log("going to call getData");
+getData().then(function(result) {
+    console.log("get Data returned: " + result);
+    console.log("processing getData results");
+});
+console.log("already called getData");
